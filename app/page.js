@@ -32,7 +32,7 @@ const TEXT = {
     btnText: 'আবেদন জমা দিন',
     sending: 'জমা হচ্ছে…',
     successTitle: 'আবেদন সফল!',
-    successMsg: 'আমরা শীঘ্রই যোগাযোগ করব।',
+    successMsg: '৭ দিনের মধ্যে আপনার সাথে যোগাযোগ করা হবে এবং Crown Coffee-তে সরাসরি সাক্ষাৎকারের জন্য ডাকা হবে।',
     again: 'নতুন আবেদন করুন',
     errFill: 'সকল তথ্য পূরণ করুন।',
     errFile: 'সিভি আপলোড করুন।',
@@ -63,7 +63,7 @@ const TEXT = {
     btnText: 'Submit Application',
     sending: 'Submitting…',
     successTitle: 'Application Sent!',
-    successMsg: "We'll be in touch shortly.",
+    successMsg: 'আপনার আবেদন গ্রহণ করা হয়েছে। ৭ দিনের মধ্যে যোগাযোগ করা হবে এবং Crown Coffee-তে সরাসরি সাক্ষাৎকারের জন্য ডাকা হবে।',
     again: 'Submit Another',
     errFill: 'Fill in all required fields.',
     errFile: 'Please upload your CV.',
@@ -106,8 +106,14 @@ export default function HomePage() {
     if (!file) { setErrMsg(c.errFile); return; }
     setErrMsg(''); setStatus('sending');
     try {
-      const ext = file.name.split('.').pop();
-      const fileName = Date.now() + '_' + name.replace(/\s+/g, '_') + '.' + ext;
+      const ext = file.name.split('.').pop().toLowerCase();
+      // Sanitize name: keep only ASCII alphanumeric, hyphens; replace everything else with underscores
+      const safeName = name
+        .replace(/[^a-zA-Z0-9\-]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_+|_+$/g, '');
+      const baseName = safeName || 'cv';
+      const fileName = Date.now() + '_' + baseName + '.' + ext;
       if (supabase) {
         const { error: uploadError } = await supabase.storage.from('cvs').upload(fileName, file, { contentType: file.type, upsert: false });
         if (uploadError) throw uploadError;
@@ -116,7 +122,11 @@ export default function HomePage() {
         if (insertError) throw insertError;
       }
       setStatus('success');
-    } catch (err) { console.error(err); setErrMsg(c.errSubmit); setStatus('idle'); }
+    } catch (err) {
+      console.error('[Crown Coffee Submit Error]', err?.message || err);
+      setErrMsg(c.errSubmit);
+      setStatus('idle');
+    }
   }
 
   function resetForm() { setDepartment(''); setPosition(''); setName(''); setContact(''); setWorkplace(''); setFile(null); setStatus('idle'); setErrMsg(''); }
@@ -139,7 +149,7 @@ export default function HomePage() {
             onMouseLeave={e => { e.currentTarget.style.background = 'var(--charcoal)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
             {c.again}
           </button>
-          <p style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: '3rem' }}>01806576024 · Sector-13, Uttara</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: '3rem' }}>01771784474 · Sector-13, Uttara</p>
         </div>
       </main>
     );
@@ -339,7 +349,7 @@ export default function HomePage() {
 
         {/* Footer */}
         <div style={{ textAlign: 'center', marginTop: '2.5rem', animation: 'fadeIn 0.8s ease 0.3s both forwards' }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: 12, letterSpacing: '0.5px' }}>01806576024 · 6, Shah Makdum Avenue, Sector-13, Uttara</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: 12, letterSpacing: '0.5px' }}>01771784474 · 6, Shah Makdum Avenue, Sector-13, Uttara</p>
         </div>
       </div>
     </main>

@@ -1,93 +1,148 @@
-@import url('https://fonts@import url(' https: //fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap');.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold: #B07A1A;
+  --gold-deep: #8A5E12;
+  --gold-soft: #C8922A;
+  --gold-glow: rgba(200, 146, 42, 0.35);
+  --black: #0A0A0A;
+  --charcoal: #1A1A1A;
+  --gray-900: #212121;
+  --gray-800: #2D2D2D;
+  --gray-700: #3A3A3A;
+  --gray-600: #555555;
+  --gray-400: #888888;
+  --gray-300: #AAAAAA;
+  --cream: #F5F0E8;
+  --cream-card: rgba(255, 255, 255, 0.72);
+  --cream-soft: #EDE7DB;
+  --white: #FFFFFF;
+  --text-main: #1A1A1A;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --danger: #D63031;
+  --success: #27AE60;
+  --font-display: 'Merriweather', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--gold-soft);
+  color: var(--white);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-soft);
+  border-radius: 3px;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
 
-  :root {
-    --gold: #B07A1A;
-    --gold-deep: #8A5E12;
-    --gold-soft: #C8922A;
-    --black: #1C1206;
-    --charcoal: #2B2118;
-    --cream: #FBF8F1;
-    --cream-card: #FFFFFF;
-    --cream-soft: #F4EEE2;
-    --text-main: #2B2118;
-    --text-secondary: #6B5B42;
-    --text-muted: #9A8A6E;
-    --border: rgba(176, 122, 26, 0.22);
-    --border-bright: rgba(176, 122, 26, 0.5);
-    --danger: #C0392B;
-    --radius-sm: 8px;
-    --radius: 12px;
-    --radius-lg: 20px;
-    --font-display: 'Merriweather', serif;
-    --font-body: 'Outfit', sans-serif;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  html, body {
-    background: var(--cream);
-    color: var(--text-main);
-    font-family: var(--font-body);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
 
-  ::-webkit-scrollbar {
-    width: 5px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
   }
 
-  ::-webkit-scrollbar-track {
-    background: var(--cream-soft);
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
 
-  ::-webkit-scrollbar-thumb {
-    background: var(--gold-soft); border-radius: 3px;
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
   }
 
-  @keyframes fadeUp {
-    from {
-      opacity: 0; transform: translateY(24px);
-    }
+  50% {
+    transform: translateY(-8px);
+  }
+}
 
-    to {
-      opacity: 1; transform: translateY(0);
-    }
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
   }
 
-  @keyframes shimmer {
-    0% {
-      background-position: -200% center;
-    }
-
-    100% {
-      background-position: 200% center;
-    }
+  50% {
+    background-position: 100% 50%;
   }
 
-  @keyframes pulse-ring {
-    0% {
-      transform: scale(1); opacity: 0.5;
-    }
-
-    100% {
-      transform: scale(1.4); opacity: 0;
-    }
+  100% {
+    background-position: 0% 50%;
   }
-
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .animate-fadeUp {
-    animation: fadeUp 0.6s ease forwards;
-  }
+}

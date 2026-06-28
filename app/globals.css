@@ -36,6 +36,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -43,8 +45,193 @@ body {
   color: var(--text-main);
   font-family: var(--font-body);
   min-height: 100vh;
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Touch / Mobile optimisations ─────────────────────────────── */
+button,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent iOS auto-zoom on input focus */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* ── Responsive helpers ────────────────────────────────────────── */
+.page-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.form-card {
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  padding: clamp(1.25rem, 5vw, 2.5rem);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.dept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0 1rem;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 3rem 0 2.5rem;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.success-box {
+  text-align: center;
+  animation: fadeUp 0.7s ease forwards;
+  max-width: 480px;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+/* ── Tap target minimum size (WCAG / mobile best practice) ─────── */
+button {
+  min-height: 44px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BREAKPOINTS
+   xs   < 380px   Very small Android phones
+   sm   480px     Small phones
+   md   768px     Large phones / small tablets
+   lg   1024px    Tablets / iPads
+   xl   1280px    Laptops / desktops
+   2xl  1920px    Large monitors / smart TVs
+───────────────────────────────────────────────────────────────── */
+
+/* Extra-small phones (< 380px) ─────────────────────────────────── */
+@media (max-width: 379px) {
+  .dept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-container {
+    padding: 0 0.75rem 3rem;
+  }
+
+  .form-card {
+    border-radius: 16px;
+    padding: 1.1rem;
+  }
+
+  .site-header {
+    padding: 0.9rem 0 0.75rem;
+  }
+
+  .hero-section {
+    padding: 1.75rem 0 1.5rem;
+  }
+}
+
+/* Small phones (380px – 639px) ─────────────────────────────────── */
+@media (min-width: 380px) and (max-width: 639px) {
+  .page-container {
+    padding: 0 1rem 4rem;
+  }
+}
+
+/* Tablets portrait (640px – 1023px) ────────────────────────────── */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .page-container {
+    max-width: 680px;
+    padding: 0 2rem 5rem;
+  }
+
+  .form-card {
+    padding: 2.5rem;
+  }
+}
+
+/* Tablets landscape + small laptops (1024px – 1279px) ──────────── */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .page-container {
+    max-width: 720px;
+    padding: 0 2.5rem 5rem;
+  }
+}
+
+/* Desktops / Laptops (1280px – 1919px) ─────────────────────────── */
+@media (min-width: 1280px) {
+  .page-container {
+    max-width: 640px;
+    padding: 0 0 5rem;
+  }
+}
+
+/* Large TVs / monitors (≥ 1920px) ──────────────────────────────── */
+@media (min-width: 1920px) {
+  .page-container {
+    max-width: 760px;
+  }
+
+  .form-card {
+    padding: 3rem;
+  }
+
+  body {
+    font-size: 18px;
+  }
+}
+
+/* Landscape phones: reduce vertical padding ─────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-header {
+    padding: 0.5rem 0;
+  }
+
+  .hero-section {
+    padding: 1rem 0;
+  }
+}
+
+/* ── Admin panel responsive ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  .admin-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-filter-input {
+    width: 100% !important;
+  }
 }
 
 ::selection {

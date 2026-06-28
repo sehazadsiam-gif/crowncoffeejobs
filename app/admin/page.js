@@ -109,11 +109,18 @@ export default function AdminPage() {
                         <h1 style={{ fontFamily: "'Merriweather', serif", fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 700, color: '#1A1A1A' }}>Dashboard</h1>
                         <p style={{ color: '#888', fontSize: 13, marginTop: 2 }}>Crown Coffee Recruitment</p>
                     </div>
-                    <button onClick={() => { setAuth(false); setPass(''); }} style={{ padding: '8px 20px', background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: 'pointer', color: '#555', fontFamily: "'Outfit', sans-serif", transition: 'all 0.2s', minHeight: 40 }}
-                        onMouseEnter={e => { e.currentTarget.style.borderColor = '#D63031'; e.currentTarget.style.color = '#D63031'; }}
-                        onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; e.currentTarget.style.color = '#555'; }}>
-                        Logout
-                    </button>
+                    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                        <a href="https://www.crowncoffeebangladesh.xyz/admin" target="_blank" rel="noopener noreferrer" style={{ padding: '8px 20px', background: '#1A1A1A', border: 'none', borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: 'pointer', color: '#fff', fontFamily: "'Outfit', sans-serif", textDecoration: 'none', transition: 'all 0.2s', minHeight: 40, display: 'inline-flex', alignItems: 'center' }}
+                            onMouseEnter={e => { e.currentTarget.style.background = '#B07A1A'; }}
+                            onMouseLeave={e => { e.currentTarget.style.background = '#1A1A1A'; }}>
+                            Main Admin ↗
+                        </a>
+                        <button onClick={() => { setAuth(false); setPass(''); }} style={{ padding: '8px 20px', background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: 'pointer', color: '#555', fontFamily: "'Outfit', sans-serif", transition: 'all 0.2s', minHeight: 40 }}
+                            onMouseEnter={e => { e.currentTarget.style.borderColor = '#D63031'; e.currentTarget.style.color = '#D63031'; }}
+                            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; e.currentTarget.style.color = '#555'; }}>
+                            Logout
+                        </button>
+                    </div>
                 </header>
 
                 {/* Stats */}
